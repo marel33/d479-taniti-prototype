@@ -18,6 +18,9 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--ink);
       background: var(--bg);
@@ -73,7 +76,7 @@
       color: var(--accent-dark);
       background: #ffffff;
     }
-    main { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+    main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 1rem; flex: 1 0 auto; }
     .page { display: none; animation: fade 160ms ease-in; }
     .page.active { display: block; }
     @keyframes fade { from { opacity: 0.5; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
@@ -108,6 +111,13 @@
     }
     .card h3 { margin: 0 0 0.45rem; }
     .card p { color: var(--muted); margin: 0 0 1rem; }
+    /* Task 2 feedback: replace misleading inactive card buttons with native, keyboard-accessible detail panels. */
+    .card-details { margin-top: 0.25rem; }
+    .card-details summary { display: inline-flex; list-style: none; align-items: center; }
+    .card-details summary::-webkit-details-marker { display: none; }
+    .card-details summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .card-details[open] summary { background: var(--accent); color: #fff; }
+    .card-details p { margin: 0.7rem 0 0; }
     .tag { display: inline-block; background: var(--sand); padding: 0.25rem 0.55rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; }
     .callout {
       background: #ecfdf5;
@@ -188,26 +198,28 @@
 
     <section id="things" class="page">
       <div class="section-title"><h2>Things to Do in Taniti</h2><p>Find beaches, rainforest activities, sightseeing, tours, and entertainment.</p></div>
-      <div class="callout"><strong>Merriton Landing - Featured Area:</strong> Many tourist activities are centered in this developing area north of Yellow Leaf Bay. It is highlighted first because visitors use it as a hub for dining, nightlife, and activities.</div>
+      <!-- Task 2 feedback, Benjamin task 3: connect named activities to Merriton Landing and nearby areas. -->
+      <div class="callout"><strong>Merriton Landing - Featured Area:</strong> Many tourist activities are centered in this developing area north of Yellow Leaf Bay. Pubs, a microbrewery, and dancing are Merriton Landing nightlife options. For nearby beach time, explore Yellow Leaf Bay; rainforest and volcano activities are separate island experiences.</div>
       <div class="grid three">
-        <article class="card"><span class="tag">Beaches</span><h3>Beach Day</h3><p>Spend time near Taniti City and the white sandy beaches around Yellow Leaf Bay.</p><button class="btn secondary">Learn more</button></article>
-        <article class="card"><span class="tag">Nature</span><h3>Rainforest Hike</h3><p>Explore Taniti's rainforest by trail or zip-line adventure.</p><button class="btn secondary">Learn more</button></article>
-        <article class="card"><span class="tag">Sightseeing</span><h3>Volcano Tour</h3><p>Visit the mountainous interior and see the active volcano.</p><button class="btn secondary">Learn more</button></article>
-        <article class="card"><span class="tag">Water</span><h3>Snorkeling</h3><p>Book snorkeling activities along Taniti's coast.</p><button class="btn secondary">Learn more</button></article>
-        <article class="card"><span class="tag">Culture</span><h3>History Museum</h3><p>Learn about local history and native architecture.</p><button class="btn secondary">Learn more</button></article>
-        <article class="card"><span class="tag">Nightlife</span><h3>Pubs and Dancing</h3><p>Visit pubs, a microbrewery, or the new dance club.</p><button class="btn secondary">Learn more</button></article>
+        <article class="card"><span class="tag">Beaches</span><h3>Beach Day</h3><p>Spend time near Taniti City and the white sandy beaches around Yellow Leaf Bay.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>Yellow Leaf Bay is a nearby beach option for visitors staying around Merriton Landing or Taniti City.</p></details></article>
+        <article class="card"><span class="tag">Nature</span><h3>Rainforest Hike</h3><p>Explore Taniti's rainforest by trail or zip-line adventure.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>Choose a rainforest trail or explore zip-line activities. Confirm tour details and conditions with a local provider.</p></details></article>
+        <article class="card"><span class="tag">Sightseeing</span><h3>Volcano Tour</h3><p>Visit the mountainous interior and see the active volcano.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>The volcano is in Taniti's mountainous interior. Plan transportation and check local tour availability before visiting.</p></details></article>
+        <article class="card"><span class="tag">Water</span><h3>Snorkeling</h3><p>Book snorkeling activities along Taniti's coast.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>Snorkeling is a coastal activity. Ask a local operator about equipment, suitable locations, and available times.</p></details></article>
+        <article class="card"><span class="tag">Culture</span><h3>History Museum</h3><p>Learn about local history and native architecture.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>Visit the local history museum to learn about Taniti's history. Check opening hours, particularly around national holidays.</p></details></article>
+        <article class="card"><span class="tag">Merriton Landing</span><h3>Pubs and Dancing</h3><p>Visit pubs, a microbrewery, or the new dance club.</p><details class="card-details"><summary class="btn secondary">Learn more</summary><p>Merriton Landing has nightlife options including pubs, a microbrewery, and dancing. Check individual venue hours before heading out.</p></details></article>
       </div>
     </section>
 
     <section id="stay" class="page">
       <div class="section-title"><h2>Places to Stay</h2><p>Taniti offers lodging from budget options to resort stays.</p></div>
+      <!-- Task 2 feedback, Benjamin and Johnelle task 1: every lodging control now expands useful details in place. -->
       <div class="grid three">
-        <article class="card"><h3>Hotels</h3><p>Many visitors choose hotels in or near Taniti City and tourist areas.</p><button class="btn secondary">View hotels</button></article>
-        <article class="card"><h3>Four-Star Resort</h3><p>A larger resort option for travelers who want a full-service stay.</p><button class="btn secondary">View resort</button></article>
-        <article class="card"><h3>Bed and Breakfasts</h3><p>Family-owned lodging for visitors who want a smaller local stay.</p><button class="btn secondary">View B&Bs</button></article>
-        <article class="card"><h3>Hostel</h3><p>Budget lodging for travelers who want a lower-cost option.</p><button class="btn secondary">View hostel</button></article>
-        <article class="card"><h3>Private Homes and Condos</h3><p>Good for repeat visitors, longer stays, and family groups.</p><button class="btn secondary">View rentals</button></article>
-        <article class="card"><h3>Beach Houses</h3><p>Stay close to the coast and beach activities.</p><button class="btn secondary">View beach houses</button></article>
+        <article class="card"><h3>Hotels</h3><p>Many visitors choose hotels in or near Taniti City and tourist areas.</p><details class="card-details"><summary class="btn secondary">View hotels</summary><p>Compare hotel locations with transportation and the activities you plan to visit. Specific properties and rates are not listed in this prototype.</p></details></article>
+        <article class="card"><h3>Four-Star Resort</h3><p>A larger resort option for travelers who want a full-service stay.</p><details class="card-details"><summary class="btn secondary">View resort</summary><p>The island has a four-star resort lodging option. Check available amenities, booking information, and rates directly with the provider.</p></details></article>
+        <article class="card"><h3>Bed and Breakfasts</h3><p>Family-owned lodging for visitors who want a smaller local stay.</p><details class="card-details"><summary class="btn secondary">View B&amp;Bs</summary><p>Bed and breakfasts provide smaller-scale lodging. Consider neighborhood, accessibility, and meal arrangements when comparing them.</p></details></article>
+        <article class="card"><h3>Hostel</h3><p>Budget lodging for travelers who want a lower-cost option.</p><details class="card-details"><summary class="btn secondary">View hostel</summary><p>Hostel lodging can suit budget-conscious visitors. Check current room arrangements and availability with the property.</p></details></article>
+        <article class="card"><h3>Private Homes and Condos</h3><p>Good for repeat visitors, longer stays, and family groups.</p><details class="card-details"><summary class="btn secondary">View rentals</summary><p>Home and condo rentals can offer more space for families or longer stays. Compare the location with your planned activities.</p></details></article>
+        <article class="card"><h3>Beach Houses</h3><p>Stay close to the coast and beach activities.</p><details class="card-details"><summary class="btn secondary">View beach houses</summary><p>Coastal lodging can be convenient for beach visits. Consider travel time to Taniti City and other destinations.</p></details></article>
       </div>
       <p class="notice">All lodging types are regulated and regularly inspected by the Tanitian government.</p>
     </section>
@@ -228,6 +240,8 @@
 
     <section id="transportation" class="page">
       <div class="section-title"><h2>Transportation</h2><p>Plan your arrival and how you will get around Taniti.</p></div>
+      <!-- Task 2 feedback, PatJohn task 2: explain how airport arrival relates to onward ground transportation without inventing a direct airport service. -->
+      <div class="callout"><strong>After You Land:</strong> Most visitors arrive through Taniti's small airport. A rental-car agency is near the airport. Taxis are available in Taniti City, and public buses operate in Taniti City from 5 a.m. to 11 p.m. daily. This prototype does not confirm direct bus or taxi service from the airport, so arrange the connection to your lodging in advance.</div>
       <div class="grid three">
         <article class="card"><h3>Arrive by Air</h3><p>Most visitors arrive by air through Taniti's small airport.</p></article>
         <article class="card"><h3>Cruise Arrival</h3><p>A small cruise ship docks in Yellow Leaf Bay one night per week.</p></article>
@@ -250,15 +264,16 @@
 
     <section id="faq" class="page">
       <div class="section-title"><h2>Travel Info &amp; FAQ</h2><p>Quick answers for currency, power, safety, healthcare, holidays, and other practical travel questions.</p></div>
+      <!-- Task 2 feedback, Benjamin task 4: keep currency and payment methods adjacent for easier scanning. -->
       <div class="grid two">
-        <article class="card"><h3>What currency is used?</h3><p>Taniti uses the U.S. dollar. Many businesses also accept euros and yen, and major credit cards are commonly accepted.</p></article>
+        <article class="card"><h3>What currency is used?</h3><p>Taniti uses the U.S. dollar. Many businesses also accept euros and yen.</p></article>
+        <article class="card"><h3>How can I pay?</h3><p>The U.S. dollar is the primary currency. Euros and yen may also be accepted, and major credit cards are commonly accepted.</p></article>
         <article class="card"><h3>What power outlets are used?</h3><p>Power outlets are 120 volts, the same as in the United States.</p></article>
         <article class="card"><h3>Is Taniti safe?</h3><p>Violent crime is very rare, though visitors should watch for petty crimes such as pickpocketing as tourism increases.</p></article>
         <article class="card"><h3>Is healthcare available?</h3><p>Taniti has one hospital and several clinics. The hospital has many multilingual employees.</p></article>
         <article class="card"><h3>What languages are spoken?</h3><p>Many younger Tanitians speak fluent English. Less English is spoken in rural areas, especially by older residents.</p></article>
         <article class="card"><h3>Are there alcohol restrictions?</h3><p>Alcohol is not served or sold between midnight and 9 a.m. The drinking age is 18.</p></article>
         <article class="card"><h3>Do holidays affect hours?</h3><p>Taniti has many national holidays, and some attractions and restaurants may close on those days.</p></article>
-        <article class="card"><h3>How can I pay?</h3><p>The U.S. dollar is the primary currency. Euros and yen may also be accepted, and major credit cards are commonly accepted.</p></article>
       </div>
     </section>
   </main>
@@ -283,3 +298,4 @@
   </script>
 </body>
 </html>
+
